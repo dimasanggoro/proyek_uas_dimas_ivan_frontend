@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
+
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "./assets/scss/style.scss";
+import "./assets/css/materialdesignicons.min.css";
+
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+
+import Index from './pages';
+import Register from './pages/register';
+import Login from './pages/login';
+import Dashboard from './pages/dashboard';
+import Logout from './pages/logout';
+
+const PrivateRoute = ({ element: Element }) => {
+  const { isAuthenticated } = useAuth();
+
+  return isAuthenticated ? <Element /> : <Navigate to="/login" />;
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <Routes>
+        <Route path='/' element={<Index/>}/>
+        <Route path='/register' element={<Register/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/dashboard' element={<PrivateRoute element={Dashboard} />} />
+        <Route path='/logout' element={<Logout />} />
+      </Routes>
+    </AuthProvider>
   );
 }
 

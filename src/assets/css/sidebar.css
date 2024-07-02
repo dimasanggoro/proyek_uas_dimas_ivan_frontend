@@ -1,0 +1,34 @@
+/* Add this to your CSS file or inside a <style> tag */
+.sidebar-wrapper {
+    height: 100vh;
+    background-color: #f8f9fa;
+    padding: 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    transition: transform 0.3s ease;
+    transform: translateX(0);
+  }
+  
+  .sidebar-wrapper.hidden {
+    transform: translateX(-100%);
+  }
+  
+  .content-wrapper {
+    margin-left: 250px;
+    padding: 15px;
+    transition: margin-left 0.3s ease;
+  }
+  
+  .content-wrapper.full-width {
+    margin-left: 0;
+  }
+  
+  .hamburger-button {
+    position: relative;
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+  }
+  
