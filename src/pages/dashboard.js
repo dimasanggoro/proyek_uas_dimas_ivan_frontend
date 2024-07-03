@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Table, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/css/sidebar.css';
+import LapanganList from '../components/lapanganList'; // Ensure the path is correct
 
 const Dashboard = () => {
   const [userData, setUserData] = useState(null);
@@ -23,20 +24,7 @@ const Dashboard = () => {
       }
     };
 
-    const fetchCustomers = () => {
-      // Dummy data for customers
-      const dummyData = [
-        { id: 1, name: 'John Doe', address: '123 Main St' },
-        { id: 2, name: 'Jane Smith', address: '456 Oak Ave' },
-        { id: 3, name: 'Bob Johnson', address: '789 Pine Rd' },
-      ];
-      setCustomers(dummyData);
-    };
-
     fetchUserData();
-    fetchCustomers();
-
-    
   }, []);
 
   const handleLogout = () => {
@@ -67,38 +55,16 @@ const Dashboard = () => {
       <div className={`content-wrapper ${sidebarVisible ? '' : 'full-width'}`}>
         <div className="row">
           <div className="col-1">
-          <button className="hamburger-button btn btn-primary" onClick={toggleSidebar}>
-            ☰
-          </button>
+            <button className="hamburger-button btn btn-primary" onClick={toggleSidebar}>
+              ☰
+            </button>
           </div>
           <div className="col-6">
-          <h1>Welcome, {userData.username}!</h1>
+            <h1>Welcome, {userData.username}!</h1>
           </div>
         </div>
 
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Address</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {customers.map((customer) => (
-              <tr key={customer.id}>
-                <td>{customer.id}</td>
-                <td>{customer.name}</td>
-                <td>{customer.address}</td>
-                <td>
-                  <Button variant="warning" className="me-2">Edit</Button>
-                  <Button variant="danger">Delete</Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+        <LapanganList />
       </div>
     </div>
   );
