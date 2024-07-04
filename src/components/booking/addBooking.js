@@ -4,23 +4,26 @@ import { Form, Card, Button, Row, Col, Modal } from 'react-bootstrap';
 import axios from 'axios';
 
 const AddBooking = () => {
-    const [userData, setUserData] = useState([]);
+    const [userId, setUserId] = useState({});
+    const [userData, setUserData] = useState({});
     const [lapangan, setLapangan] = useState([]);
-    const [showModal, setShowModal] = useState(false); // State for showing/hiding the modal
-    const [selectedLapangan, setSelectedLapangan] = useState(null); // State to store the selected lapangan
+    const [showModal, setShowModal] = useState(false);
+    const [selectedLapangan, setSelectedLapangan] = useState(null);
+    const [bookingDate, setBookingDate] = useState(''); // State for booking date
     const navigate = useNavigate();
 
     useEffect(() => {
-
         const fetchUserData = async () => {
             const storedUserData = localStorage.getItem('userData');
             if (storedUserData) {
-              setUserData(JSON.parse(storedUserData));
+                const parsedUserData = JSON.parse(storedUserData);
+                setUserData(parsedUserData);
+                fetchUserId(parsedUserData.username);
             } else {
-              // If no user data found, navigate to login page
-              navigate('/');
+                navigate('/');
             }
-          };
+        };
+
         fetchUserData();
         fetchLapangan();
     }, []);
@@ -34,23 +37,41 @@ const AddBooking = () => {
         }
     };
 
+    const fetchUserId = async (username) => {
+        try {
+            const response = await axios.post('http://localhost:3000/userid', { username });
+            setUserId(response.data);
+        } catch (error) {
+            console.error('Error fetching user ID:', error);
+        }
+    };
+
     const openModal = (lapanganItem) => {
-        setSelectedLapangan(lapanganItem); // Set the selected lapangan
-        setShowModal(true); // Show the modal
+        setSelectedLapangan(lapanganItem);
+        setShowModal(true);
     };
 
     const closeModal = () => {
-        setShowModal(false); // Close the modal
+        setShowModal(false);
     };
 
     const handleBookingSubmit = async (e) => {
-        // Implement booking submission logic here
-        console.log('Submitting booking for:', selectedLapangan);
-        console.log('Submitting booking for:', userData.username);
-        // You can perform your booking submission logic here
-        // Make sure to handle the form submission according to your requirements
+        e.preventDefault();
 
-        
+        const bookingData = {
+            id_login: userId.id_login, // Assuming the user data contains an ID field
+            id_lapangan: selectedLapangan.id_lapangan,
+            booking_date: bookingDate,
+        };
+
+        try {
+            const response = await axios.post('http://localhost:3000/booking', bookingData);
+            console.log('Booking successful:', response.data);
+            closeModal();
+            navigate('/dashboard/list-booking'); // Redirect to dashboard or another page after successful booking
+        } catch (error) {
+            console.error('Error submitting booking:', error);
+        }
     };
 
     return (
@@ -73,23 +94,28 @@ const AddBooking = () => {
                 ))}
             </Row>
 
-            {/* Modal for booking */}
             <Modal show={showModal} onHide={closeModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Booking Lapangan</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
+                    <Form onSubmit={handleBookingSubmit}>
                         <Form.Group controlId="formBasicName">
                             <Form.Label>Anda Yakin Booking?</Form.Label>
-                            <Form.Control type="hidden" placeholder="Masukkan nama lapangan" value={selectedLapangan ? selectedLapangan.id_lapangan : ''} readOnly />
+                            <Form.Control type="hidden" value={selectedLapangan ? selectedLapangan.id_lapangan : ''} readOnly />
                         </Form.Group>
-                        {/* Add other form fields as needed */}
+                        <Form.Group controlId="formBookingDate">
+                            <Form.Label>Booking Date</Form.Label>
+                            <Form.Control
+                                type="date"
+                                value={bookingDate}
+                                onChange={(e) => setBookingDate(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">Submit Booking</Button>
                     </Form>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={handleBookingSubmit}>Submit Booking</Button>
-                </Modal.Footer>
             </Modal>
         </div>
     );
