@@ -45,8 +45,8 @@ const Dashboard = () => {
         <ul className="nav flex-column">
           <li className="nav-item"><Link to="/dashboard" className="nav-link">Dashboard</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/dashboard/add-lapangan">Add Lapangan</Link></li>
-          <li className="nav-item"><a className="nav-link" href="/settings">Booking List</a></li>
-          <li className="nav-item"><a className="nav-link" href="/settings">Add Booking</a></li>
+          <li className="nav-item"><Link className="nav-link" to="/dashboard/list-booking">Booking List</Link></li>
+          <li className="nav-item"><Link className="nav-link" to="/dashboard/add-booking">Add Booking</Link></li>
           <li className="nav-item"><button onClick={handleLogout} className="btn btn-primary">Logout</button></li>
         </ul>
       </div>

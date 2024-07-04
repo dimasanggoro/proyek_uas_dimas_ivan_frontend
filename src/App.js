@@ -16,6 +16,9 @@ import Logout from './pages/logout';
 import LapanganList from './components/in/lapanganList';
 import LapanganForm from './components/in/lapanganForm';
 
+import BookingList from './components/booking/bookingList';
+import AddBooking from './components/booking/addBooking';
+
 const PrivateRoute = ({ element: Element }) => {
   const { isAuthenticated } = useAuth();
 
@@ -34,6 +37,8 @@ function App() {
           <Route path="add-lapangan" element={<LapanganForm />} />
           <Route path="edit-lapangan/:id" element={<LapanganForm />} />
           <Route path="list-lapangan" element={<LapanganList />} />
+          <Route path="list-booking" element={<BookingList />} />
+          <Route path="add-booking" element={<AddBooking />} />
         </Route>
         <Route path='/logout' element={<Logout />} />
       </Routes>
