@@ -5,6 +5,7 @@ import { Table, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/css/sidebar.css';
 import LapanganList from '../components/in/lapanganList'; // Ensure the path is correct
+import lapanganForm from '../components/in/lapanganForm';
 
 const Dashboard = () => {
   const [userData, setUserData] = useState(null);
@@ -47,8 +48,9 @@ const Dashboard = () => {
         <h2>Sidebar</h2>
         <ul className="nav flex-column">
           <li className="nav-item"><Link to="/dashboard" className="nav-link">Dashboard</Link></li>
-          <li className="nav-item"><a className="nav-link" href="/profile">Profile</a></li>
-          <li className="nav-item"><a className="nav-link" href="/settings">Settings</a></li>
+          <li className="nav-item"><a className="nav-link" href="/add-lapangan">Add Lapangan</a></li>
+          <li className="nav-item"><a className="nav-link" href="/settings">Booking List</a></li>
+          <li className="nav-item"><a className="nav-link" href="/settings">Add Booking</a></li>
           <li className="nav-item"><button onClick={handleLogout} className="btn btn-primary">Logout</button></li>
         </ul>
       </div>
@@ -65,8 +67,6 @@ const Dashboard = () => {
         </div>
 
         <LapanganList />
-
-
       </div>
     </div>
   );

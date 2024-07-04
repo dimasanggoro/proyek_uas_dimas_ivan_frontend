@@ -13,6 +13,8 @@ import Login from './pages/login';
 import Dashboard from './pages/dashboard';
 import Logout from './pages/logout';
 
+import LapanganForm from './components/in/lapanganForm';
+
 const PrivateRoute = ({ element: Element }) => {
   const { isAuthenticated } = useAuth();
 
@@ -28,6 +30,7 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/dashboard' element={<PrivateRoute element={Dashboard} />} />
         <Route path='/logout' element={<Logout />} />
+        <Route path="/add-lapangan" element={<LapanganForm />} />
       </Routes>
     </AuthProvider>
   );

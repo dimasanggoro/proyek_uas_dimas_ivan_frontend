@@ -49,7 +49,7 @@ const LapanganList = () => {
               <td>{lapanganItem.tipe_lapangan}</td>
               <td>
                 <img
-                  src={`http://localhost:3000/${lapanganItem.foto_lapangan}`}
+                  src={`http://localhost:3000/images/${lapanganItem.foto_lapangan}`}
                   alt={lapanganItem.nama_lapangan}
                   style={{ width: '100px', height: 'auto' }}
                 />
