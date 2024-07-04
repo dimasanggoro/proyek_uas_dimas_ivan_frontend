@@ -26,12 +26,12 @@ export default function Index(){
                               <li className="list-inline-item mx-4 mt-4">
                                 <span className="text-black-50 d-block">Nama Mahasiswa</span>
                                 <a className="text-black title-dark" href="/blog-standard-post/2">Dimas A Anindyojati</a>
-                                <a className="text-black title-dark d-block" href="/blog-standard-post/2">Ivan</a>
+                                <a className="text-black title-dark d-block" href="/blog-standard-post/2">Ivan Iskandar Rizky</a>
                                 </li>
                                 <li className="list-inline-item mx-4 mt-4">
                                   <span className="text-black-50 d-block">NIM</span>
                                   <span className="text-black title-dark">411211117</span>
-                                  <span className="text-black title-dark d-block">4112</span>
+                                  <span className="text-black title-dark d-block">411211058</span>
                                   </li>
                                   <li className="list-inline-item mx-4 mt-4">
                                     <span className="text-black-50 d-block">Sebagai</span>
