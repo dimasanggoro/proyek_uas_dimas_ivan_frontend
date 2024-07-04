@@ -7,6 +7,7 @@ const LapanganForm = () => {
   const [id_tipe_lapangan, setid_tipe_lapangan] = useState('');
   const [nama_lapangan, setnama_lapangan] = useState('');
   const [foto_lapangan, setfoto_lapangan] = useState(null); // Update to handle file object
+  const [tipeLapanganOptions, setTipeLapanganOptions] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -23,6 +24,14 @@ const LapanganForm = () => {
         fetchLapanganById();
     }
   }, [id, fetchLapanganById]);
+
+  useEffect(() => {
+    const fetchTipeLapanganOptions = async () => {
+      const response = await axios.get('http://localhost:3000/tipe-lapangan');
+      setTipeLapanganOptions(response.data);
+    };
+    fetchTipeLapanganOptions();
+  }, []);
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -55,13 +64,18 @@ const LapanganForm = () => {
       <h2 className="my-3">{id ? 'Edit Lapangan' : 'Tambah Lapangan'}</h2>
       <Form onSubmit={submitForm}>
         <Form.Group controlId="formTipeLapangan" className="mb-3">
-          <Form.Label>Id Tipe Lapangan</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Masukkan id tipe lapangan"
+          <Form.Label>Tipe Lapangan</Form.Label>
+          <Form.Select
             value={id_tipe_lapangan}
             onChange={(e) => setid_tipe_lapangan(e.target.value)}
-          />
+          >
+            <option value="">Pilih tipe lapangan</option>
+            {tipeLapanganOptions.map((option) => (
+              <option key={option.id} value={option.id_tipe_lapangan}>
+                {option.tipe_lapangan}
+              </option>
+            ))}
+          </Form.Select>
         </Form.Group>
 
         <Form.Group controlId="formNama" className="mb-3">
