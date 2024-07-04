@@ -20,11 +20,13 @@ const LapanganList = () => {
   };
 
   const deleteLapangan = async (id) => {
-    try {
-      await axios.delete(`http://localhost:3000/lapangan/${id}`);
-      fetchLapangan(); // Refresh the list after deletion
-    } catch (error) {
-      console.error('Error deleting lapangan:', error);
+    if (window.confirm('Are you sure you want to delete this item?')) {
+      try {
+        await axios.delete(`http://localhost:3000/lapangan/${id}`);
+        fetchLapangan(); // Refresh the list after deletion
+      } catch (error) {
+        console.error('Error deleting lapangan:', error);
+      }
     }
   };
 
@@ -55,7 +57,7 @@ const LapanganList = () => {
                 />
               </td>
               <td>
-                <Link to={`/edit-lapangan/${lapanganItem.id_lapangan}`}>
+                <Link to={`/dashboard/edit-lapangan/${lapanganItem.id_lapangan}`}>
                   <Button variant="primary">Edit</Button>
                 </Link>
                 {' '}
@@ -67,8 +69,6 @@ const LapanganList = () => {
       </Table>
     </div>
   );
-
-  
 };
 
 export default LapanganList;

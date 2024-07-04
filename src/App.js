@@ -32,6 +32,7 @@ function App() {
         <Route path='/dashboard/*' element={<PrivateRoute element={Dashboard} />}>
           <Route index element={<LapanganList />} />
           <Route path="add-lapangan" element={<LapanganForm />} />
+          <Route path="edit-lapangan/:id" element={<LapanganForm />} />
           <Route path="list-lapangan" element={<LapanganList />} />
         </Route>
         <Route path='/logout' element={<Logout />} />

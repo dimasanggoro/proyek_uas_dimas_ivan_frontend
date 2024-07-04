@@ -6,22 +6,22 @@ import axios from 'axios';
 const LapanganForm = () => {
   const [id_tipe_lapangan, setid_tipe_lapangan] = useState('');
   const [nama_lapangan, setnama_lapangan] = useState('');
-  const [foto_lapangan, setfoto_lapangan] = useState(null); // Update to handle file object
+  const [foto_lapangan, setfoto_lapangan] = useState(null);
   const [tipeLapanganOptions, setTipeLapanganOptions] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
 
   const fetchLapanganById = useCallback(async () => {
     const response = await axios.get(`http://localhost:3000/lapangan/${id}`);
-    const { id_tipe_lapangan, nama_lapangan, foto_lapangan } = response.data;
+    const { id_tipe_lapangan, nama_lapangan } = response.data;
     setid_tipe_lapangan(id_tipe_lapangan);
     setnama_lapangan(nama_lapangan);
-    setfoto_lapangan(null); // Clear the file input when loading data
+    setfoto_lapangan(null);
   }, [id]);
 
   useEffect(() => {
     if (id) {
-        fetchLapanganById();
+      fetchLapanganById();
     }
   }, [id, fetchLapanganById]);
 
@@ -53,7 +53,7 @@ const LapanganForm = () => {
         });
       }
 
-      navigate('/dashboard');
+      navigate('/dashboard/list-lapangan');
     } catch (error) {
       console.error('Error submitting form:', error);
     }
@@ -64,14 +64,14 @@ const LapanganForm = () => {
       <h2 className="my-3">{id ? 'Edit Lapangan' : 'Tambah Lapangan'}</h2>
       <Form onSubmit={submitForm}>
         <Form.Group controlId="formTipeLapangan" className="mb-3">
-          <Form.Label>Tipe Lapangan</Form.Label>
+          <Form.Label>Id Tipe Lapangan</Form.Label>
           <Form.Select
             value={id_tipe_lapangan}
             onChange={(e) => setid_tipe_lapangan(e.target.value)}
           >
             <option value="">Pilih tipe lapangan</option>
             {tipeLapanganOptions.map((option) => (
-              <option key={option.id} value={option.id_tipe_lapangan}>
+              <option key={option.id_tipe_lapangan} value={option.id_tipe_lapangan}>
                 {option.tipe_lapangan}
               </option>
             ))}
@@ -92,7 +92,7 @@ const LapanganForm = () => {
           <Form.Label>Foto Lapangan</Form.Label>
           <Form.Control
             type="file"
-            onChange={(e) => setfoto_lapangan(e.target.files[0])} // Update to handle file selection
+            onChange={(e) => setfoto_lapangan(e.target.files[0])}
           />
         </Form.Group>
 

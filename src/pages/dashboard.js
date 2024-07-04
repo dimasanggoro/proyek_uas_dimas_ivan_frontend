@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate, Outlet } from 'react-router-dom';
-import { Table, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/css/sidebar.css';
-import LapanganList from '../components/in/lapanganList'; // Ensure the path is correct
-import lapanganForm from '../components/in/lapanganForm';
 
 const Dashboard = () => {
   const [userData, setUserData] = useState(null);
