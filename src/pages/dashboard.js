@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Outlet } from 'react-router-dom';
 import { Table, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/css/sidebar.css';
@@ -9,7 +9,6 @@ import lapanganForm from '../components/in/lapanganForm';
 
 const Dashboard = () => {
   const [userData, setUserData] = useState(null);
-  const [customers, setCustomers] = useState([]);
   const [sidebarVisible, setSidebarVisible] = useState(true);
   const { logout } = useAuth();
   const navigate = useNavigate();
@@ -48,7 +47,7 @@ const Dashboard = () => {
         <h2>Sidebar</h2>
         <ul className="nav flex-column">
           <li className="nav-item"><Link to="/dashboard" className="nav-link">Dashboard</Link></li>
-          <li className="nav-item"><a className="nav-link" href="/add-lapangan">Add Lapangan</a></li>
+          <li className="nav-item"><Link className="nav-link" to="/dashboard/add-lapangan">Add Lapangan</Link></li>
           <li className="nav-item"><a className="nav-link" href="/settings">Booking List</a></li>
           <li className="nav-item"><a className="nav-link" href="/settings">Add Booking</a></li>
           <li className="nav-item"><button onClick={handleLogout} className="btn btn-primary">Logout</button></li>
@@ -66,7 +65,11 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <LapanganList />
+        {/* This will render the component based on the route */}
+        <div>
+        <Outlet />
+        </div>
+
       </div>
     </div>
   );

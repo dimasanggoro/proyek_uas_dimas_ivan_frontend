@@ -44,7 +44,7 @@ const LapanganForm = () => {
         });
       }
 
-      navigate('/');
+      navigate('/dashboard');
     } catch (error) {
       console.error('Error submitting form:', error);
     }
