@@ -96,27 +96,30 @@ const AddBooking = () => {
 
             <Modal show={showModal} onHide={closeModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Booking Lapangan</Modal.Title>
+                    <Modal.Title className="w-100 text-center">Booking Lapangan</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <Form onSubmit={handleBookingSubmit}>
+                <Form onSubmit={handleBookingSubmit}>
+                    <Modal.Body>
                         <Form.Group controlId="formBasicName">
-                            <Form.Label>Anda Yakin Booking?</Form.Label>
                             <Form.Control type="hidden" value={selectedLapangan ? selectedLapangan.id_lapangan : ''} readOnly />
                         </Form.Group>
                         <Form.Group controlId="formBookingDate">
-                            <Form.Label>Booking Date</Form.Label>
+                            <Form.Label className="d-flex justify-content-center">Masukan Booking Date</Form.Label>
                             <Form.Control
+                                className="w-50 mx-auto p-3 text-center"
                                 type="date"
                                 value={bookingDate}
                                 onChange={(e) => setBookingDate(e.target.value)}
                                 required
                             />
                         </Form.Group>
+                    </Modal.Body>
+                    <Modal.Footer className="d-flex justify-content-center">
                         <Button variant="primary" type="submit">Submit Booking</Button>
-                    </Form>
-                </Modal.Body>
+                    </Modal.Footer>
+                </Form>
             </Modal>
+
         </div>
     );
 };
