@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { Link, useNavigate, Outlet } from 'react-router-dom';
+import { NavLink, useNavigate, Outlet } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTachometerAlt, faPlus, faList, faSignOutAlt, faBars } from '@fortawesome/free-solid-svg-icons';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/css/sidebar.css';
 
@@ -40,21 +42,40 @@ const Dashboard = () => {
 
   return (
     <div>
-      <div className={`sidebar-wrapper ${sidebarVisible ? '' : 'hidden'}`}>
+      <div className={`sidebar-wrapper d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary ${sidebarVisible ? '' : 'hidden'}`}>
         <h2>Sidebar</h2>
-        <ul className="nav flex-column">
-          <li className="nav-item"><Link to="/dashboard" className="nav-link">Dashboard</Link></li>
-          <li className="nav-item"><Link className="nav-link" to="/dashboard/add-lapangan">Add Lapangan</Link></li>
-          <li className="nav-item"><Link className="nav-link" to="/dashboard/list-booking">Booking List</Link></li>
-          <li className="nav-item"><Link className="nav-link" to="/dashboard/add-booking">Add Booking</Link></li>
-          <li className="nav-item"><button onClick={handleLogout} className="btn btn-primary">Logout</button></li>
+        <ul className="nav nav-pills flex-column mb-auto">
+          <li className="nav-link link-body-emphasis">
+            <NavLink className="nav-link link-body-emphasis" activeClassName="active" to="/dashboard" >
+            <FontAwesomeIcon className="bi pe-none me-2" icon={faTachometerAlt} />List Lapangan
+            </NavLink>
+          </li>
+          <li className="nav-link link-body-emphasis">
+            <NavLink className="nav-link link-body-emphasis" activeClassName="active" to="/dashboard/add-lapangan">
+            <FontAwesomeIcon className="bi pe-none me-2" icon={faPlus} />Add Lapangan
+            </NavLink>
+          </li>
+          <li className="nav-link link-body-emphasis">
+            <NavLink className="nav-link link-body-emphasis" activeClassName="active" to="/dashboard/list-booking">
+            <FontAwesomeIcon className="bi pe-none me-2" icon={faList} /> Booking List
+            </NavLink>
+          </li>
+          <li className="nav-link link-body-emphasis">
+            <NavLink className="nav-link link-body-emphasis" activeClassName="active" to="/dashboard/add-booking">
+            <FontAwesomeIcon className="bi pe-none me-2" icon={faPlus} />Add Booking
+            </NavLink>
+          </li>
         </ul>
+        <hr></hr>
+        <button onClick={handleLogout} className="btn btn-primary">
+        <FontAwesomeIcon icon={faSignOutAlt} />Logout
+        </button>
       </div>
       <div className={`content-wrapper ${sidebarVisible ? '' : 'full-width'}`}>
         <div className="row">
           <div className="col-1">
             <button className="hamburger-button btn btn-primary" onClick={toggleSidebar}>
-              ☰
+              <FontAwesomeIcon icon={faBars} />
             </button>
           </div>
           <div className="col-6">
