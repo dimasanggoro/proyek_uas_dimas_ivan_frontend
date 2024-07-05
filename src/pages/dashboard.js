@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { NavLink, useNavigate, Outlet } from 'react-router-dom';
+import { Link, NavLink, useNavigate, Outlet } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTachometerAlt, faPlus, faList, faSignOutAlt, faBars } from '@fortawesome/free-solid-svg-icons';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -46,8 +46,8 @@ const Dashboard = () => {
         <h2>Sidebar</h2>
         <ul className="nav nav-pills flex-column mb-auto">
           <li className="nav-link link-body-emphasis">
-            <NavLink className="nav-link link-body-emphasis" activeClassName="active" to="/dashboard" >
-            <FontAwesomeIcon className="bi pe-none me-2" icon={faTachometerAlt} />List Lapangan
+            <NavLink className="nav-link link-body-emphasis" to="/dashboard" end>
+            <FontAwesomeIcon className="bi pe-none me-2" icon={faTachometerAlt} />Dashboard
             </NavLink>
           </li>
           <li className="nav-link link-body-emphasis">
