@@ -82,6 +82,8 @@ const Dashboard = () => {
             <h1>Welcome, {userData.username}!</h1>
           </div>
         </div>
+        <hr style={{ height: '2px', color: '#ed1d61', background: '#ed1d61', fontSize: '0', border: '0' }} />
+
 
         {/* This will render the component based on the route */}
         <div>
