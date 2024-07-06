@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Table, Button } from 'react-bootstrap';
-import axios from 'axios';
+import api from '../../api'; // Import the api instance
 
 const LapanganList = () => {
   const [lapangan, setLapangan] = useState([]);
@@ -12,7 +12,7 @@ const LapanganList = () => {
 
   const fetchLapangan = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/lapangan/');
+      const response = await api.get('/lapangan/');
       setLapangan(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -22,7 +22,7 @@ const LapanganList = () => {
   const deleteLapangan = async (id) => {
     if (window.confirm('Are you sure you want to delete this item?')) {
       try {
-        await axios.delete(`http://localhost:3000/lapangan/${id}`);
+        await api.delete(`/lapangan/${id}`);
         fetchLapangan(); // Refresh the list after deletion
       } catch (error) {
         console.error('Error deleting lapangan:', error);

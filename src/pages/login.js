@@ -18,7 +18,11 @@ export default function Login() {
         username,
         passw: passw, // Send the hashed password
       });
-      const userData = {username: `${username}`}; 
+
+      // Extract the token from the server response
+      const { token } = response.data;
+
+      const userData = {username, token}; 
       // Store user data in local storage
       localStorage.setItem('userData', JSON.stringify(userData));
 

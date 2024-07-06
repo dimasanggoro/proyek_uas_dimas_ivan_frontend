@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button } from 'react-bootstrap';
-import axios from 'axios';
+import api from '../../api'; // Import the api instance
 import { format } from 'date-fns';
 
 const BookingList = () => {
@@ -13,7 +13,7 @@ const BookingList = () => {
 
     const fetchBooking = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/booking/');
+            const response = await api.get('http://localhost:3000/booking/');
             setBooking(response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -23,7 +23,7 @@ const BookingList = () => {
     const deleteBooking = async (id) => {
         if (window.confirm('Are you sure you want to delete this item?')) {
             try {
-                await axios.delete(`http://localhost:3000/booking/${id}`);
+                await api.delete(`http://localhost:3000/booking/${id}`);
                 fetchBooking(); // Refresh the list after deletion
             } catch (error) {
                 console.error('Error deleting booking:', error);

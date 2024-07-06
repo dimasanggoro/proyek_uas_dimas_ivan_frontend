@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Form, Card, Button, Row, Col, Modal } from 'react-bootstrap';
-import axios from 'axios';
+import api from '../../api'; // Import the api instance
 
 const AddBooking = () => {
     const [userId, setUserId] = useState({});
@@ -30,7 +30,7 @@ const AddBooking = () => {
 
     const fetchLapangan = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/lapangan/');
+            const response = await api.get('http://localhost:3000/lapangan/');
             setLapangan(response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -39,7 +39,7 @@ const AddBooking = () => {
 
     const fetchUserId = async (username) => {
         try {
-            const response = await axios.post('http://localhost:3000/userid', { username });
+            const response = await api.post('http://localhost:3000/userid', { username });
             setUserId(response.data);
         } catch (error) {
             console.error('Error fetching user ID:', error);
@@ -65,7 +65,7 @@ const AddBooking = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:3000/booking', bookingData);
+            const response = await api.post('http://localhost:3000/booking', bookingData);
             console.log('Booking successful:', response.data);
             closeModal();
             navigate('/dashboard/list-booking'); // Redirect to dashboard or another page after successful booking

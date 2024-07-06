@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
-import axios from 'axios';
+import api from '../../api'; // Import the api instance
 
 const LapanganForm = () => {
-  const [id_tipe_lapangan, setid_tipe_lapangan] = useState([]);
+  const [id_tipe_lapangan, setid_tipe_lapangan] = useState('');
   const [nama_lapangan, setnama_lapangan] = useState('');
   const [foto_lapangan, setfoto_lapangan] = useState(null);
   const [tipeLapanganOptions, setTipeLapanganOptions] = useState([]);
@@ -12,7 +12,7 @@ const LapanganForm = () => {
   const navigate = useNavigate();
 
   const fetchLapanganById = useCallback(async () => {
-    const response = await axios.get(`http://localhost:3000/lapangan/${id}`);
+    const response = await api.get(`/lapangan/${id}`);
     const { id_tipe_lapangan, nama_lapangan } = response.data;
     setid_tipe_lapangan(id_tipe_lapangan);
     setnama_lapangan(nama_lapangan);
@@ -27,7 +27,7 @@ const LapanganForm = () => {
 
   useEffect(() => {
     const fetchTipeLapanganOptions = async () => {
-      const response = await axios.get('http://localhost:3000/tipe-lapangan');
+      const response = await api.get('/tipe-lapangan');
       setTipeLapanganOptions(response.data);
     };
     fetchTipeLapanganOptions();
@@ -44,12 +44,12 @@ const LapanganForm = () => {
 
     try {
       if (id) {
-        await axios.put(`http://localhost:3000/lapangan/${id}`, formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
+        await api.put(`/lapangan/${id}`, formData, {
+          headers: { 'Content-Type': 'multipart/form-data' }
         });
       } else {
-        await axios.post('http://localhost:3000/lapangan', formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
+        await api.post('/lapangan', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' }
         });
       }
 
