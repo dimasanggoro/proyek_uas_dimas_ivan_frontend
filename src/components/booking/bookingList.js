@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { Table, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { format } from 'date-fns';
@@ -70,10 +69,6 @@ const BookingList = () => {
                             </td>
                             <td>{formatDate(bookingItem.booking_date)}</td>
                             <td>
-                                <Link to={`/dashboard/edit-booking/${bookingItem.id_booking}`}>
-                                    <Button variant="primary">Edit</Button>
-                                </Link>
-                                {' '}
                                 <Button variant="danger" onClick={() => deleteBooking(bookingItem.id_booking)}>Delete</Button>
                             </td>
                         </tr>
